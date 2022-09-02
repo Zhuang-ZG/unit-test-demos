@@ -9,8 +9,9 @@ import java.util.List;
  * @date 2022/9/2 14:00
  * @Description:
  */
-public interface TodoRepository {
+public interface TodoItemRepository {
 
     public TodoItem save(TodoItem item) ;
 
+    List<TodoItem> findAll();
 }

@@ -10,7 +10,7 @@ import java.util.Optional;
  * @date 2022/9/2 13:56
  * @Description:
  */
-public interface TodoService {
+public interface TodoItemService {
 
     /**
      * add new todoItem
@@ -18,5 +18,7 @@ public interface TodoService {
      * @return
      */
     TodoItem addToDoItem(TodoParameter toDoParameter);
+
+    Optional<TodoItem> markTodoItemDone(int index);
 
 }
