@@ -11,6 +11,7 @@ import practice.zhuangzg.todo.service.TodoItemService;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author: ZhuangZG
@@ -50,6 +51,12 @@ public class TodoItemItemServiceImpl implements TodoItemService {
         } catch (Exception e) {
             return Optional.empty();
         }
+    }
 
+    @Override
+    public List<TodoItem> listAll(boolean all) {
+        return repository.findAll().stream()
+                .filter(i -> all || !i.isDone())
+                .collect(Collectors.toList());
     }
 }

@@ -8,6 +8,7 @@ import practice.zhuangzg.todo.bean.TodoParameter;
 import practice.zhuangzg.todo.repository.TodoItemRepository;
 import practice.zhuangzg.todo.service.TodoItemService;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,4 +77,42 @@ class TodoItemServiceImplTest {
         final Optional<TodoItem> todoItem = service.markTodoItemDone(2);
         assertThat(todoItem).isEmpty();
     }
+
+    @Test
+    public void should_list_all() {
+        when(repository.findAll())
+                .thenReturn(List.of(new TodoItem("foo")));
+        List<TodoItem> todoItems = service.listAll(true);
+        assertThat(todoItems).hasSize(1);
+    }
+
+    @Test
+    public void should_not_list_without_item() {
+        when(repository.findAll())
+                .thenReturn(Collections.emptyList());
+        List<TodoItem> todoItems = service.listAll(true);
+        assertThat(todoItems).hasSize(0);
+    }
+
+    @Test
+    public void should_list_all_without_done() {
+        final TodoItem a = new TodoItem("A");
+        a.markDone();
+        final TodoItem b = new TodoItem("B");
+        when(repository.findAll())
+                .thenReturn(List.of(a, b));
+        List<TodoItem> todoItems = service.listAll(false);
+        assertThat(todoItems).hasSize(1);
+    }
+
+    @Test
+    public void should_not_list_without_done_item() {
+        final TodoItem doneItem = new TodoItem("foo");
+        doneItem.markDone();
+        when(repository.findAll()).thenReturn(List.of(doneItem));
+
+        List<TodoItem> items = service.listAll(false);
+        assertThat(items).hasSize(0);
+    }
+
 }
