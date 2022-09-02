@@ -23,3 +23,6 @@ target
 *.iws
 *.iml
 out
+
+#
+art_of_unit_test/target

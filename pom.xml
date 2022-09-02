@@ -6,7 +6,12 @@
 
     <groupId>zhuang.zg</groupId>
     <artifactId>unit-test-demos</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>art_of_unit_test</module>
+        <module>test_course_for_programmer</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author: ZhuangZG
- * @date 2022/9/2 9:43
+ * @date 2022/9/2 10:17
  * @Description:
  */
 @Slf4j
@@ -13,6 +13,6 @@ public class ApiTest {
 
     @Test
     public void test() {
-        log.info("it works !!!");
+        log.info("success !");
     }
 }
