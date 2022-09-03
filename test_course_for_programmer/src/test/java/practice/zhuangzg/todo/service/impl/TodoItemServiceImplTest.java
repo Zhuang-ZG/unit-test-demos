@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import practice.zhuangzg.todo.bean.TodoItem;
+import practice.zhuangzg.todo.bean.TodoItemIndexParameter;
 import practice.zhuangzg.todo.bean.TodoParameter;
 import practice.zhuangzg.todo.repository.TodoItemRepository;
 import practice.zhuangzg.todo.service.TodoItemService;
@@ -39,7 +40,7 @@ class TodoItemServiceImplTest {
     @Test
     public void should_add_todo_item() {
         when(repository.save(any())).then(returnsFirstArg());
-        TodoItem item = service.addToDoItem(new TodoParameter("foo"));
+        TodoItem item = service.addToDoItem(TodoParameter.of("foo"));
         assertThat(item.getContent()).isEqualTo("foo");
     }
 
@@ -47,14 +48,14 @@ class TodoItemServiceImplTest {
     public void should_throw_null_exception() {
         when(repository.save(any())).then(returnsFirstArg());
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> service.addToDoItem(null));
+                .isThrownBy(() -> service.addToDoItem(TodoParameter.of(null)));
     }
 
     @Test
     public void should_mark_todo_item_as_done() {
         when(repository.save(any())).then(returnsFirstArg());
         when(repository.findAll()).thenReturn(List.of(new TodoItem("foo")));
-        Optional<TodoItem> todoItem = service.markTodoItemDone(1);
+        Optional<TodoItem> todoItem = service.markTodoItemDone(TodoItemIndexParameter.of(1));
         assertThat(todoItem).isPresent();
         final TodoItem actual = todoItem.get();
         assertThat(actual.isDone()).isTrue();
@@ -66,7 +67,7 @@ class TodoItemServiceImplTest {
                 .thenReturn(List.of(new TodoItem("foo")));
         when(repository.save(any())).then(returnsFirstArg());
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> service.markTodoItemDone(-1));
+                .isThrownBy(() -> service.markTodoItemDone(TodoItemIndexParameter.of(-1)));
     }
 
     @Test
@@ -74,7 +75,7 @@ class TodoItemServiceImplTest {
         when(repository.findAll())
                 .thenReturn(List.of(new TodoItem("foo")));
         when(repository.save(any())).then(returnsFirstArg());
-        final Optional<TodoItem> todoItem = service.markTodoItemDone(2);
+        final Optional<TodoItem> todoItem = service.markTodoItemDone(TodoItemIndexParameter.of(2));
         assertThat(todoItem).isEmpty();
     }
 

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import practice.zhuangzg.todo.bean.TodoItem;
+import practice.zhuangzg.todo.bean.TodoItemIndexParameter;
 import practice.zhuangzg.todo.bean.TodoParameter;
 import practice.zhuangzg.todo.repository.TodoItemRepository;
 import practice.zhuangzg.todo.service.TodoItemService;
@@ -27,23 +28,17 @@ public class TodoItemItemServiceImpl implements TodoItemService {
 
     @Override
     public TodoItem addToDoItem(TodoParameter toDoParameter) {
-        if (Objects.isNull(toDoParameter)) {
-            throw new IllegalArgumentException("Null or empty content is not allowed");
-        }
 
         TodoItem todoItem = new TodoItem(toDoParameter.getContent());
         return this.repository.save(todoItem);
     }
 
     @Override
-    public Optional<TodoItem> markTodoItemDone(final int index) {
-        if (index < 0) {
-            throw new IllegalArgumentException("index should greater than zero. ");
-        }
+    public Optional<TodoItem> markTodoItemDone(final TodoItemIndexParameter index) {
         final List<TodoItem> all = repository.findAll();
 
         try {
-            TodoItem todoItem = all.get(index - 1);
+            TodoItem todoItem = all.get(index.getIndex() - 1);
             if (Objects.nonNull(todoItem)) {
                 todoItem.markDone();
             }

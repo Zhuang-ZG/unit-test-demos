@@ -1,6 +1,7 @@
 package practice.zhuangzg.todo.service;
 
 import practice.zhuangzg.todo.bean.TodoItem;
+import practice.zhuangzg.todo.bean.TodoItemIndexParameter;
 import practice.zhuangzg.todo.bean.TodoParameter;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public interface TodoItemService {
      */
     TodoItem addToDoItem(TodoParameter toDoParameter);
 
-    Optional<TodoItem> markTodoItemDone(int index);
+    Optional<TodoItem> markTodoItemDone(TodoItemIndexParameter index);
 
     List<TodoItem> listAll(boolean all);
 }
