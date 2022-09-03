@@ -17,7 +17,7 @@ public class TodoItemIndexParameter {
     }
 
     public static TodoItemIndexParameter of(final int index) {
-        if (index < 0) {
+        if (index <= 0) {
             throw new IllegalArgumentException("index should greater than zero.");
         }
         return new TodoItemIndexParameter(index);
