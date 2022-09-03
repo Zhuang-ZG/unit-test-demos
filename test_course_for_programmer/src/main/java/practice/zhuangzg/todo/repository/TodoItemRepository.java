@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface TodoItemRepository {
 
-    public TodoItem save(TodoItem item) ;
+    TodoItem save(TodoItem item) ;
 
     List<TodoItem> findAll();
 }

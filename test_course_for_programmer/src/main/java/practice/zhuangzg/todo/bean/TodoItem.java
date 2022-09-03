@@ -1,6 +1,9 @@
 package practice.zhuangzg.todo.bean;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.*;
+
+import java.io.Serializable;
 
 /**
  * @author: ZhuangZG
@@ -9,9 +12,11 @@ import lombok.*;
  */
 @Getter
 @EqualsAndHashCode
-public class TodoItem {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+public class TodoItem implements Serializable {
     private long index;
-    private final String content;
+    private String content;
     private boolean done;
 
     public TodoItem(final String content) {
