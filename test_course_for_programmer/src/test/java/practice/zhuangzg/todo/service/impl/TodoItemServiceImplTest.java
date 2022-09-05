@@ -34,13 +34,13 @@ class TodoItemServiceImplTest {
     @BeforeEach
     public void setUp() {
         repository = mock(TodoItemRepository.class);
-        service = new TodoItemItemServiceImpl(repository);
+        service = new TodoItemServiceImpl(repository);
     }
 
     @Test
     public void should_add_todo_item() {
         when(repository.save(any())).then(returnsFirstArg());
-        TodoItem item = service.addToDoItem(TodoParameter.of("foo"));
+        TodoItem item = service.addTodoItem(TodoParameter.of("foo"));
         assertThat(item.getContent()).isEqualTo("foo");
     }
 
@@ -48,7 +48,7 @@ class TodoItemServiceImplTest {
     public void should_throw_null_exception() {
         when(repository.save(any())).then(returnsFirstArg());
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> service.addToDoItem(TodoParameter.of(null)));
+                .isThrownBy(() -> service.addTodoItem(TodoParameter.of(null)));
     }
 
     @Test
@@ -83,7 +83,7 @@ class TodoItemServiceImplTest {
     public void should_list_all() {
         when(repository.findAll())
                 .thenReturn(List.of(new TodoItem("foo")));
-        List<TodoItem> todoItems = service.listAll(true);
+        List<TodoItem> todoItems = service.list(true);
         assertThat(todoItems).hasSize(1);
     }
 
@@ -91,7 +91,7 @@ class TodoItemServiceImplTest {
     public void should_not_list_without_item() {
         when(repository.findAll())
                 .thenReturn(Collections.emptyList());
-        List<TodoItem> todoItems = service.listAll(true);
+        List<TodoItem> todoItems = service.list(true);
         assertThat(todoItems).hasSize(0);
     }
 
@@ -102,7 +102,7 @@ class TodoItemServiceImplTest {
         final TodoItem b = new TodoItem("B");
         when(repository.findAll())
                 .thenReturn(List.of(a, b));
-        List<TodoItem> todoItems = service.listAll(false);
+        List<TodoItem> todoItems = service.list(false);
         assertThat(todoItems).hasSize(1);
     }
 
@@ -112,7 +112,7 @@ class TodoItemServiceImplTest {
         doneItem.markDone();
         when(repository.findAll()).thenReturn(List.of(doneItem));
 
-        List<TodoItem> items = service.listAll(false);
+        List<TodoItem> items = service.list(false);
         assertThat(items).hasSize(0);
     }
 

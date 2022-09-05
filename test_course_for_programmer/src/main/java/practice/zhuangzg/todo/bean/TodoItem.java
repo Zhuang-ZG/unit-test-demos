@@ -11,6 +11,7 @@ import java.io.Serializable;
  * @Description:
  */
 @Getter
+@ToString
 @EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)

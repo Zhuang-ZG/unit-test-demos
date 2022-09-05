@@ -37,7 +37,7 @@ public class FileTodoItemRepository implements TodoItemRepository {
 
     @Override
     public List<TodoItem> findAll() {
-        if (FileUtil.isEmpty(this.file)) {
+        if (this.file.length()==0) {
             return new ArrayList<>();
         }
         return JsonUtil.getObjects(file);

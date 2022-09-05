@@ -19,9 +19,9 @@ public interface TodoItemService {
      * @param toDoParameter
      * @return
      */
-    TodoItem addToDoItem(TodoParameter toDoParameter);
+    TodoItem addTodoItem(TodoParameter toDoParameter);
 
     Optional<TodoItem> markTodoItemDone(TodoItemIndexParameter index);
 
-    List<TodoItem> listAll(boolean all);
+    List<TodoItem> list(boolean all);
 }

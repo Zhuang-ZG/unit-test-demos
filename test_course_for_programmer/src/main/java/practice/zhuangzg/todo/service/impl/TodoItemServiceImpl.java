@@ -22,12 +22,12 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class TodoItemItemServiceImpl implements TodoItemService {
+public class TodoItemServiceImpl implements TodoItemService {
 
     private TodoItemRepository repository;
 
     @Override
-    public TodoItem addToDoItem(TodoParameter toDoParameter) {
+    public TodoItem addTodoItem(TodoParameter toDoParameter) {
 
         TodoItem todoItem = new TodoItem(toDoParameter.getContent());
         return this.repository.save(todoItem);
@@ -42,14 +42,14 @@ public class TodoItemItemServiceImpl implements TodoItemService {
             if (Objects.nonNull(todoItem)) {
                 todoItem.markDone();
             }
-            return Optional.ofNullable(todoItem);
+            return Optional.ofNullable(repository.save(todoItem));
         } catch (Exception e) {
             return Optional.empty();
         }
     }
 
     @Override
-    public List<TodoItem> listAll(boolean all) {
+    public List<TodoItem> list(boolean all) {
         return repository.findAll().stream()
                 .filter(i -> all || !i.isDone())
                 .collect(Collectors.toList());
