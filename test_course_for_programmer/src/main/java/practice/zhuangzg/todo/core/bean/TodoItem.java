@@ -15,7 +15,7 @@ import java.io.Serializable;
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@AllArgsConstructor
 @Entity
 @Table(name = "todo_items")
 public class TodoItem implements Serializable {

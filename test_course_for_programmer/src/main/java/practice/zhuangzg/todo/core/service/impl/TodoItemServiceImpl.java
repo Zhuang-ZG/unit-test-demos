@@ -3,12 +3,14 @@ package practice.zhuangzg.todo.core.service.impl;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Service;
 import practice.zhuangzg.todo.core.bean.TodoItem;
 import practice.zhuangzg.todo.core.bean.TodoItemIndexParameter;
 import practice.zhuangzg.todo.core.bean.TodoParameter;
 import practice.zhuangzg.todo.core.repository.TodoItemRepository;
 import practice.zhuangzg.todo.core.service.TodoItemService;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -22,8 +24,10 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Service
 public class TodoItemServiceImpl implements TodoItemService {
 
+    @Resource
     private TodoItemRepository repository;
 
     @Override
