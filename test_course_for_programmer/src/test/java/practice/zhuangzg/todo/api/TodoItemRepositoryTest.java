@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -30,6 +31,9 @@ public class TodoItemRepositoryTest {
     @Resource
     TodoItemRepository repository;
 
+    @Resource
+    TestEntityManager testEntityManager;
+
     @Test
     public void should_find_nothing_from_empty_repository() {
         List<TodoItem> todoItems = repository.findAll();
@@ -38,8 +42,8 @@ public class TodoItemRepositoryTest {
 
     @Test
     public void should_find_saved_todo_items() {
-        repository.save(new TodoItem("foo1"));
-        repository.save(new TodoItem("foo2"));
+        testEntityManager.persist(new TodoItem("foo1"));
+        testEntityManager.persist(new TodoItem("foo2"));
         final List<TodoItem> todoItems = repository.findAll();
         assertThat(todoItems).hasSize(2);
         TodoItem todoItem1 = todoItems.get(0);
@@ -57,8 +61,8 @@ public class TodoItemRepositoryTest {
 
     @Test
     public void should_update_todo_item_as_done() {
-        repository.save(new TodoItem("foo1"));
-        repository.save(new TodoItem("foo2"));
+        testEntityManager.persist(new TodoItem("foo1"));
+        testEntityManager.persist(new TodoItem("foo2"));
         List<TodoItem> todoItems = repository.findAll();
         TodoItem todoItem = todoItems.get(0);
         todoItem.markDone();
@@ -70,8 +74,4 @@ public class TodoItemRepositoryTest {
         assertThat(todoItems).hasSize(2);
         assertThat(todoItem.isDone()).isTrue();
     }
-
-
-
-
 }
