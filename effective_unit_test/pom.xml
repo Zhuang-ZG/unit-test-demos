@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>practice.zhuangzg</groupId>
-    <artifactId>art_of_unit_test</artifactId>
+    <artifactId>effective_unit_test</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

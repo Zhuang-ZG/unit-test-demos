@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>art_of_unit_test</module>
+        <module>effective_unit_test</module>
         <module>test_course_for_programmer</module>
     </modules>
 
